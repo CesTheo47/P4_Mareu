@@ -16,7 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.Maréu.PopupOverlay" />
+            app:title="@string/app_name"
+            app:navigationIcon="@drawable/ic_baseline_filter_list_24"
+            app:popupTheme="@style/Theme.Maréu.PopupOverlay"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
