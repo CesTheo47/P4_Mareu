@@ -28,4 +28,25 @@ public class Meeting {
         this.email = email;
     }
 
+    public long getId() { return id; }
+
+    public void setId(long id) { this.id = id; }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    public long getDate() { return date; }
+
+    public void setDate(long date) { this.date = date; }
+
+    public String getRoom() { return room; }
+
+    public void setRoom(String room) { this.room = room; }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
+
+
 }
