@@ -1,5 +1,10 @@
 package com.example.maru.model;
 
+import androidx.annotation.ColorRes;
+
+import java.util.Date;
+import java.util.List;
+
 public class Meeting {
 
     private long id;
@@ -8,18 +13,19 @@ public class Meeting {
     private String name;
 
     /** Date */
-    private long date;
+    private Date date;
 
     /** Room */
-    private String room;
+    private Room room;
 
     /** Email */
-    private String email;
+    private List<String> email;
 
     /** Color */
+    @ColorRes
+    private int color;
 
-
-    public Meeting(long id, String name, long date, String room, String email){
+    public Meeting(long id, String name, Date date, Room room, List<String> email){
 
         this.id = id;
         this.name = name;
@@ -36,17 +42,17 @@ public class Meeting {
 
     public void setName(String name) { this.name = name; }
 
-    public long getDate() { return date; }
+    public Date getDate() { return date; }
 
-    public void setDate(long date) { this.date = date; }
+    public void setDate(Date date) { this.date = date; }
 
-    public String getRoom() { return room; }
+    public Room getRoom() { return room; }
 
-    public void setRoom(String room) { this.room = room; }
+    public void setRoom(Room room) { this.room = room; }
 
-    public String getEmail() { return email; }
+    public List<String> getEmail() { return email; }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(List<String> email) { this.email = email; }
 
 
 }
