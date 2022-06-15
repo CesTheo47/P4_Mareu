@@ -6,14 +6,19 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.maru.R;
 import com.example.maru.databinding.ActivityMainBinding;
+import com.example.maru.di.DI;
+import com.example.maru.service.MeetingApiService;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private MeetingApiService apiService;
+    private MainAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        apiService = DI.getMeetingApiService();
+
         setSupportActionBar(binding.toolbar);
-        binding.recycler
+        initRecycler();
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private void initRecycler() {
+        adapter = new MainAdapter(apiService.getMeetings());
+        binding.recycler.setAdapter(adapter);
+        binding.recycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

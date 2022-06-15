@@ -15,8 +15,6 @@ public enum Room {
 
     @Override
     public String toString() {
-        return "Room{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 }

@@ -13,11 +13,15 @@ import com.example.maru.R;
 import com.example.maru.databinding.ItemMeetingBinding;
 import com.example.maru.model.Meeting;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     private final List<Meeting> mMeetings;
+
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh'h'mm");
+
 
     public MainAdapter(List<Meeting> items) {
         mMeetings = items;
@@ -32,8 +36,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
-        holder.binding.itemMeetingFirstLine.setText(meeting.getName());
-
+        StringBuilder sb = new StringBuilder();
+        for (String email : meeting.getEmailList()){
+            sb.append(email + ", ");
+        }
+        holder.binding.itemMeetingFirstLine.setText(meeting.getName() + " - " + simpleDateFormat.format(meeting.getDate()) + " - " + meeting.getRoom());
+        holder.binding.itemMeetingSecondLine.setText(sb.toString());
     }
 
     @Override

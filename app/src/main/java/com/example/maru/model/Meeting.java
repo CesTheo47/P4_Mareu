@@ -19,19 +19,19 @@ public class Meeting {
     private Room room;
 
     /** Email */
-    private List<String> email;
+    private List<String> emailList;
 
     /** Color */
     @ColorRes
     private int color;
 
-    public Meeting(long id, String name, Date date, Room room, List<String> email){
+    public Meeting(long id, String name, Date date, Room room, List<String> emailList){
 
         this.id = id;
         this.name = name;
         this.date = date;
         this.room = room;
-        this.email = email;
+        this.emailList = emailList;
     }
 
     public long getId() { return id; }
@@ -50,9 +50,19 @@ public class Meeting {
 
     public void setRoom(Room room) { this.room = room; }
 
-    public List<String> getEmail() { return email; }
+    public List<String> getEmailList() {
+        return emailList;
+    }
 
-    public void setEmail(List<String> email) { this.email = email; }
+    public void setEmailList(List<String> emailList) {
+        this.emailList = emailList;
+    }
 
+    public int getColor() {
+        return color;
+    }
 
+    public void setColor(int color) {
+        this.color = color;
+    }
 }
