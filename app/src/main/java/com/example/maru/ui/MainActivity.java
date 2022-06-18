@@ -1,5 +1,6 @@
 package com.example.maru.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddMeetingActivity.navigate(this);
+                //startActivity(new Intent(view.getContext(), AddMeetingActivity));
             }
+
         });
     }
 
