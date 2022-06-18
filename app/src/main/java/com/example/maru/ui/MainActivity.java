@@ -11,8 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.maru.R;
 import com.example.maru.databinding.ActivityMainBinding;
 import com.example.maru.di.DI;
+import com.example.maru.event.DeleteMeetingEvent;
 import com.example.maru.service.MeetingApiService;
-import com.google.android.material.snackbar.Snackbar;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                AddMeetingActivity.navigate(this);
             }
         });
     }
@@ -66,6 +68,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onDeleteMeeting(DeleteMeetingEvent event) {
+        apiService.deleteMeeting(event.meeting);
+        adapter.updateList(apiService.getMeetings());
     }
 
 }
