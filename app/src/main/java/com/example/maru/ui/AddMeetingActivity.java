@@ -13,8 +13,8 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private Object binding;
 
-    public static void navigate(View.OnClickListener onClickListener) {
-    }
+
+
 
     /* public void onClick(View view) {
         if (view == binding.submitButton) {

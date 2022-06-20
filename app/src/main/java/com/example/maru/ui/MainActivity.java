@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(view.getContext(), AddMeetingActivity));
+                startActivity(new Intent(view.getContext(), AddMeetingActivity.class));
             }
 
         });
