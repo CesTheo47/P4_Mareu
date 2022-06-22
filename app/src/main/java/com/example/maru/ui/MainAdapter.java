@@ -1,11 +1,14 @@
 package com.example.maru.ui;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.maru.R;
 import com.example.maru.databinding.ItemMeetingBinding;
 import com.example.maru.event.DeleteMeetingEvent;
 import com.example.maru.model.Meeting;
@@ -18,12 +21,14 @@ import java.util.List;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     private List<Meeting> mMeetings;
+    private Context mContext;
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh'h'mm");
 
 
-    public MainAdapter(List<Meeting> items) {
+    public MainAdapter(List<Meeting> items, Context context) {
         mMeetings = items;
+        mContext = context;
     }
 
     @Override
@@ -47,6 +52,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
             }
         });
+        holder.binding.itemMeetingColor.setColorFilter(ContextCompat.getColor(mContext, meeting.getColor()));
     }
 
     @Override

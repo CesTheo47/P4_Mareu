@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecycler() {
-        adapter = new MainAdapter(apiService.getMeetings());
+        adapter = new MainAdapter(apiService.getMeetings(), this);
         binding.recycler.setAdapter(adapter);
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
     }

@@ -9,6 +9,24 @@
     android:orientation="vertical"
     tools:ignore="ExtraText">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+        android:id="@+id/item_meeting_color"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@color/purple_500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameLyt"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -32,7 +50,7 @@
         android:layout_marginTop="20dp"
         android:tooltipText="Rooms" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -42,15 +60,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="showTimePickerDialog"
-            android:text="Pick Date" />
+            android:text="Pick Date"
+            tools:ignore="MissingConstraints" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="showTimePickerDialog"
-            android:text="Pick Time" />
+            android:text="Pick Time"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout

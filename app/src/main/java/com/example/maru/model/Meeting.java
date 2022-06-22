@@ -25,13 +25,14 @@ public class Meeting {
     @ColorRes
     private int color;
 
-    public Meeting(long id, String name, Date date, Room room, List<String> emailList){
+    public Meeting(long id, String name, Date date, Room room, List<String> emailList, int color){
 
         this.id = id;
         this.name = name;
         this.date = date;
         this.room = room;
         this.emailList = emailList;
+        this.color = color;
     }
 
     public long getId() { return id; }
