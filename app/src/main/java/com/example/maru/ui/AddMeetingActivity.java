@@ -2,6 +2,7 @@ package com.example.maru.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +18,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private ActivityCreateMeetingBinding binding;
     private MeetingApiService apiService;
+    private Button mItemMeetingColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,30 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         apiService = DI.getMeetingApiService();
 
+       /* mItemMeetingColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Java Code
+                new MaterialColorPickerDialog
+                        .Builder(this)
+                        .setTitle("Pick Theme")
+                        .setColorShape(ColorShape.SQAURE)
+                        .setColorSwatch(ColorSwatch._300)
+                        .setDefaultColor(mDefaultColor)
+                        .setColorListener(new ColorListener() {
+                            @Override
+                            public void onColorSelected(int color, @NotNull String colorHex) {
+                                // Handle Color Selection
+                            }
+                        })
+                        .show();
+
+            }
+        }); */
+
     }
+
+
 
 
 
