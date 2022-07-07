@@ -2,13 +2,9 @@ package com.example.maru.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.maru.R;
 import com.example.maru.databinding.ActivityCreateMeetingBinding;
 import com.example.maru.di.DI;
 import com.example.maru.service.MeetingApiService;
@@ -19,11 +15,16 @@ import com.github.dhaval2404.colorpicker.model.ColorSwatch;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddMeetingActivity extends AppCompatActivity {
 
 
     private ActivityCreateMeetingBinding binding;
     private MeetingApiService apiService;
+    private int selectedColor = 0;
+    private List<String> emailList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,13 @@ public class AddMeetingActivity extends AppCompatActivity {
                         })
                         .show();
 
+            }
+        });
+
+        binding.emailAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //git addemailList.add(editView.getText().toString());
             }
         });
 
