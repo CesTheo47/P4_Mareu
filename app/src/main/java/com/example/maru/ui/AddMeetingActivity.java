@@ -56,10 +56,20 @@ public class AddMeetingActivity extends AppCompatActivity {
         binding.emailAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //git addemailList.add(editView.getText().toString());
+                emailList.add(binding.editEmail.getText().toString());
+                binding.editEmail.setText("");
+                updateEmailList();
             }
         });
 
+    }
+
+    private void updateEmailList() {
+        StringBuilder sb = new StringBuilder();
+        for (String email : emailList){
+            sb.append(email + ", ");
+        }
+        binding.txtEmailList.setText(sb.toString());
     }
 
 
