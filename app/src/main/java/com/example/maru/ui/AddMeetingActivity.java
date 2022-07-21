@@ -1,12 +1,17 @@
 package com.example.maru.ui;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.maru.databinding.ActivityCreateMeetingBinding;
 import com.example.maru.di.DI;
+import com.example.maru.model.Room;
 import com.example.maru.service.MeetingApiService;
 import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog;
 import com.github.dhaval2404.colorpicker.listener.ColorListener;
@@ -25,6 +30,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     private MeetingApiService apiService;
     private int selectedColor = 0;
     private List<String> emailList = new ArrayList();
+    private Spinner rooms_spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +59,35 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         });
 
+
         binding.emailAdd.setOnClickListener(new View.OnClickListener() {
+
+            private boolean checkIfEmailIsValid(CharSequence email) {
+                return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+            }
+
+            EditText emailid = (EditText) binding.editEmail;
+            String getEmailId = emailid.getText().toString();
+
             @Override
             public void onClick(View v) {
-                emailList.add(binding.editEmail.getText().toString());
-                binding.editEmail.setText("");
-                updateEmailList();
+                if (checkIfEmailIsValid(getEmailId)){
+                    emailList.add(binding.editEmail.getText().toString());
+                    binding.editEmail.setText("");
+                    updateEmailList();
+                }
             }
         });
 
+        /*binding.roomsSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rooms_spinner.setAdapter(new ArrayAdapter<Room>(this, binding.roomsSpinner, Room.values()));
+            }
+        }); */
+
     }
+
 
     private void updateEmailList() {
         StringBuilder sb = new StringBuilder();
