@@ -1,9 +1,11 @@
 package com.example.maru.ui;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -21,6 +23,7 @@ import com.github.dhaval2404.colorpicker.model.ColorSwatch;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -30,7 +33,9 @@ public class AddMeetingActivity extends AppCompatActivity {
     private MeetingApiService apiService;
     private int selectedColor = 0;
     private List<String> emailList = new ArrayList();
-    private Spinner rooms_spinner;
+    private Spinner roomsSpinner;
+    private Button btnDatePicker;
+    private Button btnTimePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +91,13 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         }); */
 
+        binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
 
@@ -96,13 +108,6 @@ public class AddMeetingActivity extends AppCompatActivity {
         }
         binding.txtEmailList.setText(sb.toString());
     }
-
-    private void setDatePickerDialog(){
-
-    }
-
-
-
 
 
 

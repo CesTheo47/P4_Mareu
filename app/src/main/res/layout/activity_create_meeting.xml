@@ -58,6 +58,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn_date_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="showTimePickerDialog"
@@ -68,6 +69,7 @@
 
 
             <Button
+                android:id="@+id/btn_time_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="showTimePickerDialog"
