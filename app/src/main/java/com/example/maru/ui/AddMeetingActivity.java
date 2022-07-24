@@ -8,9 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.maru.R;
 import com.example.maru.databinding.ActivityCreateMeetingBinding;
 import com.example.maru.di.DI;
 import com.example.maru.model.Room;
@@ -31,11 +33,8 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private ActivityCreateMeetingBinding binding;
     private MeetingApiService apiService;
-    private int selectedColor = 0;
+    private int selectedColor = R.color.purple_500;
     private List<String> emailList = new ArrayList();
-    private Spinner roomsSpinner;
-    private Button btnDatePicker;
-    private Button btnTimePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,15 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         apiService = DI.getMeetingApiService();
 
+        initColorPicker();
+        initSpinner();
+        initDateTimePickers();
+        initEmailList();
+        initSaveButton();
+    }
+
+
+    private void initColorPicker() {
         binding.itemMeetingColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,49 +65,48 @@ public class AddMeetingActivity extends AppCompatActivity {
                             @Override
                             public void onColorSelected(int color, @NotNull String colorHex) {
                                 binding.itemMeetingColor.setColorFilter(color);
+                                selectedColor = color;
                             }
                         })
                         .show();
 
             }
         });
+    }
 
+    private void initSpinner() {
+        binding.roomsSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Room.values()));
 
-        binding.emailAdd.setOnClickListener(new View.OnClickListener() {
+        //Room selectedRoom = (Room) binding.roomsSpinner.getSelectedItem();
+    }
 
-            private boolean checkIfEmailIsValid(CharSequence email) {
-                return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-            }
-
-            EditText emailid = (EditText) binding.editEmail;
-            String getEmailId = emailid.getText().toString();
-
+    private void initDateTimePickers() {
+        /*binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkIfEmailIsValid(getEmailId)){
+
+            }
+        });*/
+    }
+
+    private void initEmailList() {
+        binding.emailAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkIfEmailIsValid(binding.editEmail .getText().toString())){
                     emailList.add(binding.editEmail.getText().toString());
                     binding.editEmail.setText("");
                     updateEmailList();
+                } else {
+                    Toast.makeText(AddMeetingActivity.this, "Email invalide", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        /*binding.roomsSpinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rooms_spinner.setAdapter(new ArrayAdapter<Room>(this, binding.roomsSpinner, Room.values()));
-            }
-        }); */
-
-        binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
     }
 
+    private boolean checkIfEmailIsValid(CharSequence email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
     private void updateEmailList() {
         StringBuilder sb = new StringBuilder();
@@ -109,18 +116,31 @@ public class AddMeetingActivity extends AppCompatActivity {
         binding.txtEmailList.setText(sb.toString());
     }
 
-
-
-    /* public void onClick(View view) {
-        if (view == binding.submitButton) {
-            onSubmit();
-        }
-    } */
-
-    private void onSubmit() {
-        //String name = binding.textFieldRecipient.getEditText().getText().toString();
-        // email,....
-
+    private void initSaveButton() {
+        binding.submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isFormValid()) {
+                    // Créer l'objet meeting avec tous les input de l'utilisateurs
+                    // Revenir sur l'écran précédent
+                    onBackPressed();
+                }
+            }
+        });
     }
+
+    private boolean isFormValid() {
+        if (binding.name.getText().toString().isEmpty()) {
+            Toast.makeText(AddMeetingActivity.this, "Merci de renseigner un nom", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+
+
 
 }

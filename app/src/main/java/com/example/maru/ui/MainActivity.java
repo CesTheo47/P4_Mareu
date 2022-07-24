@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         apiService = DI.getMeetingApiService();
 
         setSupportActionBar(binding.toolbar);
-        initRecycler();
+
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initRecycler();
     }
 
     private void initRecycler() {
