@@ -1,20 +1,27 @@
 package com.example.maru.ui;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.maru.R;
 import com.example.maru.databinding.ActivityCreateMeetingBinding;
 import com.example.maru.di.DI;
+import com.example.maru.model.Meeting;
 import com.example.maru.model.Room;
 import com.example.maru.service.MeetingApiService;
 import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog;
@@ -26,6 +33,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -33,8 +42,12 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private ActivityCreateMeetingBinding binding;
     private MeetingApiService apiService;
-    private int selectedColor = R.color.purple_500;
+    private int selectedColor;
     private List<String> emailList = new ArrayList();
+    private boolean isDateSelected = false;
+    private boolean isTimeSelected = false;
+
+    private Calendar selectedDate = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +67,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
     private void initColorPicker() {
+        selectedColor = ContextCompat.getColor(this, R.color.purple_500);
         binding.itemMeetingColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,12 +95,61 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     private void initDateTimePickers() {
-        /*binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
+        // Date
+        binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Calendar c = Calendar.getInstance();
+
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int day) {
+                                int correctMonth = month + 1;
+                                binding.btnDatePicker.setText(day + "/" + correctMonth + "/" + year);
+
+                                selectedDate.set(Calendar.YEAR, year);
+                                selectedDate.set(Calendar.MONTH, month);
+                                selectedDate.set(Calendar.DAY_OF_MONTH, day);
+
+                                isDateSelected = true;
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
             }
-        });*/
+        });
+
+        //Time
+        binding.btnTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar c = Calendar.getInstance();
+
+                int mHour = c.get(Calendar.HOUR_OF_DAY);
+                int mMinute = c.get(Calendar.MINUTE);
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(v.getContext(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                binding.btnTimePicker.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                                selectedDate.set(Calendar.HOUR, hourOfDay);
+                                selectedDate.set(Calendar.MINUTE, minute);
+
+                                isTimeSelected = true;
+                            }
+                        }, mHour, mMinute, true);
+                timePickerDialog.show();
+
+            }
+        });
     }
 
     private void initEmailList() {
@@ -111,7 +174,11 @@ public class AddMeetingActivity extends AppCompatActivity {
     private void updateEmailList() {
         StringBuilder sb = new StringBuilder();
         for (String email : emailList){
-            sb.append(email + ", ");
+            sb.append(email);
+
+            if (emailList.indexOf(email) != (emailList.size() -1)) {
+                sb.append(", ");
+            }
         }
         binding.txtEmailList.setText(sb.toString());
     }
@@ -121,8 +188,14 @@ public class AddMeetingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isFormValid()) {
-                    // Créer l'objet meeting avec tous les input de l'utilisateurs
-                    // Revenir sur l'écran précédent
+                    Meeting meeting = new Meeting(
+                            binding.name.getText().toString(),
+                            selectedDate.getTime(),
+                            (Room) binding.roomsSpinner.getSelectedItem(),
+                            emailList,
+                            selectedColor
+                    );
+                    apiService.createMeeting(meeting);
                     onBackPressed();
                 }
             }
@@ -135,12 +208,23 @@ public class AddMeetingActivity extends AppCompatActivity {
             return false;
         }
 
+        if (!isDateSelected) {
+            Toast.makeText(AddMeetingActivity.this, "Merci de renseigner une date", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!isTimeSelected) {
+            Toast.makeText(AddMeetingActivity.this, "Merci de renseigner une heure", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (emailList.isEmpty()) {
+            Toast.makeText(AddMeetingActivity.this, "Merci de renseigner un email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         return true;
     }
-
-
-
 
 
 }

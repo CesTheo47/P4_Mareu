@@ -42,7 +42,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         Meeting meeting = mMeetings.get(position);
         StringBuilder sb = new StringBuilder();
         for (String email : meeting.getEmailList()){
-            sb.append(email + ", ");
+            sb.append(email);
+
+            if (meeting.getEmailList().indexOf(email) != (meeting.getEmailList().size() -1)) {
+                sb.append(", ");
+            }
         }
         holder.binding.itemMeetingFirstLine.setText(meeting.getName() + " - " + simpleDateFormat.format(meeting.getDate()) + " - " + meeting.getRoom());
         holder.binding.itemMeetingSecondLine.setText(sb.toString());
@@ -52,7 +56,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
             }
         });
-        holder.binding.itemMeetingColor.setColorFilter(ContextCompat.getColor(mContext, meeting.getColor()));
+        holder.binding.itemMeetingColor.setColorFilter(meeting.getColor());
     }
 
     @Override
