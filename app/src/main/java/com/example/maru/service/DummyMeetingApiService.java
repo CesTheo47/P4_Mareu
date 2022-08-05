@@ -1,7 +1,9 @@
 package com.example.maru.service;
 
 import com.example.maru.model.Meeting;
+import com.example.maru.model.Room;
 
+import java.util.Date;
 import java.util.List;
 
 public class DummyMeetingApiService implements MeetingApiService {
@@ -10,6 +12,18 @@ public class DummyMeetingApiService implements MeetingApiService {
 
     @Override
     public List<Meeting> getMeetings() {
+        return meetings;
+    }
+
+    @Override
+    public List<Meeting> getMeetingsByDates(Date startDate, Date endDate) {
+        //TODO
+        return meetings;
+    }
+
+    @Override
+    public List<Meeting> getMeetingsByRoom(Room room) {
+        //TODO
         return meetings;
     }
 

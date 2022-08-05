@@ -1,6 +1,8 @@
 package com.example.maru.service;
 
 
+import android.graphics.Color;
+
 import com.example.maru.R;
 import com.example.maru.model.Meeting;
 import com.example.maru.model.Room;
@@ -14,14 +16,14 @@ import java.util.List;
 public abstract class DummyMeetingGenerator {
 
     public static List<Meeting> DUMMY_MEETINGS = Arrays.asList(
-        new Meeting( "Réunion A", Calendar.getInstance().getTime(), Room.MARIO, getFakeEmails(), R.color.black),
-        new Meeting( "Réunion B", Calendar.getInstance().getTime(), Room.YOSHI, getFakeEmails(), R.color.purple_200),
-        new Meeting( "Réunion C", Calendar.getInstance().getTime(), Room.PEACH, getFakeEmails(), R.color.teal_200),
-        new Meeting( "Réunion D", Calendar.getInstance().getTime(), Room.LUIGI, getFakeEmails(), R.color.purple_200),
-        new Meeting( "Réunion E", Calendar.getInstance().getTime(), Room.TOAD, getFakeEmails(), R.color.teal_200),
-        new Meeting( "Réunion F", Calendar.getInstance().getTime(), Room.MARIO, getFakeEmails(), R.color.black),
-        new Meeting( "Réunion G", Calendar.getInstance().getTime(), Room.LUIGI, getFakeEmails(), R.color.black),
-        new Meeting( "Réunion H", Calendar.getInstance().getTime(), Room.YOSHI, getFakeEmails(), R.color.purple_200)
+        new Meeting( "Réunion A", Calendar.getInstance().getTime(), Room.MARIO, getFakeEmails(), Color.parseColor("#FF0000")),
+        new Meeting( "Réunion B", Calendar.getInstance().getTime(), Room.YOSHI, getFakeEmails(), Color.parseColor("#F7F074")),
+        new Meeting( "Réunion C", Calendar.getInstance().getTime(), Room.PEACH, getFakeEmails(), Color.parseColor("#81f774")),
+        new Meeting( "Réunion D", Calendar.getInstance().getTime(), Room.LUIGI, getFakeEmails(), Color.parseColor("#3e38ed")),
+        new Meeting( "Réunion E", Calendar.getInstance().getTime(), Room.TOAD, getFakeEmails(), Color.parseColor("#ea38ed")),
+        new Meeting( "Réunion F", Calendar.getInstance().getTime(), Room.MARIO, getFakeEmails(), Color.parseColor("#F7F074")),
+        new Meeting( "Réunion G", Calendar.getInstance().getTime(), Room.LUIGI, getFakeEmails(), Color.parseColor("#fcc244")),
+        new Meeting( "Réunion H", Calendar.getInstance().getTime(), Room.YOSHI, getFakeEmails(), Color.parseColor("#81f774"))
 
     );
 

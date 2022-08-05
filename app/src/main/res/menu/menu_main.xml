@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.maru.ui.MainActivity$MainActivity">
     <item
-        android:id="@+id/action_filters"
-        android:icon="@drawable/ic_baseline_filter_list_24"
-        android:title="@string/action_filters"
-        app:showAsAction="always" />
+        android:id="@+id/filter_date"
+        android:title="Filter by date"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/filter_reset"
+        android:title="Filter reset"
+        app:showAsAction="never" />
 </menu>

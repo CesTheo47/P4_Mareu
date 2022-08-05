@@ -2,10 +2,14 @@ package com.example.maru.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -13,10 +17,13 @@ import com.example.maru.R;
 import com.example.maru.databinding.ActivityMainBinding;
 import com.example.maru.di.DI;
 import com.example.maru.event.DeleteMeetingEvent;
+import com.example.maru.model.Meeting;
 import com.example.maru.service.MeetingApiService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,11 +78,33 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_filters) {
+        if (id == R.id.filter_date) {
+            dateDialog();
+            return true;
+        }
+        if (id == R.id.filter_reset) {
+            resetFilters();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void resetFilters() {
+        adapter.updateList(apiService.getMeetings());
+
+    }
+
+    private void dateDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_date_picker, null);
+        dialogBuilder.setView(dialogView);
+
+        Button btnStartDate = (Button) dialogView.findViewById(R.id.btn_start_date);
+        btnStartDate.setText("test label");
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
     }
 
     @Override
