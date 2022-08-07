@@ -77,9 +77,12 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.filter_date) {
             dateDialog();
+            return true;
+        }
+        if (id == R.id.filter_room) {
+            roomDialog();
             return true;
         }
         if (id == R.id.filter_reset) {
@@ -88,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void roomDialog() {
     }
 
     private void resetFilters() {
@@ -101,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
 
         Button btnStartDate = (Button) dialogView.findViewById(R.id.btn_start_date);
-        btnStartDate.setText("test label");
+        btnStartDate.setText("Start Date");
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 

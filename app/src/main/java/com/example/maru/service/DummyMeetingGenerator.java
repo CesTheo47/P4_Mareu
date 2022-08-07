@@ -20,10 +20,10 @@ public abstract class DummyMeetingGenerator {
         new Meeting( "Réunion B", Calendar.getInstance().getTime(), Room.YOSHI, getFakeEmails(), Color.parseColor("#F7F074")),
         new Meeting( "Réunion C", Calendar.getInstance().getTime(), Room.PEACH, getFakeEmails(), Color.parseColor("#81f774")),
         new Meeting( "Réunion D", Calendar.getInstance().getTime(), Room.LUIGI, getFakeEmails(), Color.parseColor("#3e38ed")),
-        new Meeting( "Réunion E", Calendar.getInstance().getTime(), Room.TOAD, getFakeEmails(), Color.parseColor("#ea38ed")),
-        new Meeting( "Réunion F", Calendar.getInstance().getTime(), Room.MARIO, getFakeEmails(), Color.parseColor("#F7F074")),
-        new Meeting( "Réunion G", Calendar.getInstance().getTime(), Room.LUIGI, getFakeEmails(), Color.parseColor("#fcc244")),
-        new Meeting( "Réunion H", Calendar.getInstance().getTime(), Room.YOSHI, getFakeEmails(), Color.parseColor("#81f774"))
+        new Meeting( "Réunion E", Calendar.getInstance().getTime(), Room.TOAD, getFakeEmails(), Color.parseColor("#ea38ed"))
+        //new Meeting( "Réunion F", Calendar.getInstance().getTime(), Room.MARIO, getFakeEmails(), Color.parseColor("#F7F074")),
+        //new Meeting( "Réunion G", Calendar.getInstance().getTime(), Room.LUIGI, getFakeEmails(), Color.parseColor("#fcc244")),
+        //new Meeting( "Réunion H", Calendar.getInstance().getTime(), Room.YOSHI, getFakeEmails(), Color.parseColor("#81f774"))
 
     );
 

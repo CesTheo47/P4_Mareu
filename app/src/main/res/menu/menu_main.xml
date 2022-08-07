@@ -4,10 +4,14 @@
     tools:context="com.example.maru.ui.MainActivity$MainActivity">
     <item
         android:id="@+id/filter_date"
-        android:title="Filter by date"
+        android:title="Filtrer par date"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/filter_room"
+        android:title="Filtrer par room"
         app:showAsAction="never" />
     <item
         android:id="@+id/filter_reset"
-        android:title="Filter reset"
+        android:title="Effacer les filtres"
         app:showAsAction="never" />
 </menu>
