@@ -1,5 +1,6 @@
 package com.example.maru.ui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +25,7 @@ import com.example.maru.service.MeetingApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,9 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         if (id == R.id.filter_date) {
@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
         btnStartDate.setText("Start Date");
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
+
+        // gerer le button
 
     }
 

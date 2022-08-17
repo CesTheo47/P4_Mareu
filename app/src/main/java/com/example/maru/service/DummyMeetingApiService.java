@@ -21,21 +21,39 @@ public class DummyMeetingApiService implements MeetingApiService {
 
     @Override
     public List<Meeting> getMeetingsByDates(Date startDate, Date endDate) {
+        Calendar startCalendar = Calendar.getInstance();
+        startCalendar.setTime(startDate);
+        startCalendar.set(Calendar.HOUR, 0);
+        startCalendar.set(Calendar.MINUTE, 0);
+        startCalendar.set(Calendar.SECOND, 0);
+        startCalendar.set(Calendar.MILLISECOND, 0);
+        
+        Calendar endCalendar = Calendar.getInstance();
+        endCalendar.setTime(endDate);
+        endCalendar.set(Calendar.HOUR, 23);
+        endCalendar.set(Calendar.MINUTE, 59);
+        endCalendar.set(Calendar.SECOND, 59);
+        endCalendar.set(Calendar.MILLISECOND, 999);
 
         List<Meeting> mMeetingsFiltered = new ArrayList<>();
-        int size = meetings.size();
-        for (int e = 0; e < size; e++) {
-            Calendar mMeetingsCalendar = Calendar.getInstance();
-            mMeetingsCalendar.setTime(meetings.get(e).getDate());
+        for (Meeting meeting : meetings) {
+            if (startCalendar.getTime().before(meeting.getDate()) && endCalendar.getTime().after(meeting.getDate())) {
+                mMeetingsFiltered.add(meeting);
+            }
         }
 
-        return meetings;
+        return mMeetingsFiltered;
     }
 
     @Override
     public List<Meeting> getMeetingsByRoom(Room room) {
-        //TODO
-        return meetings;
+        List<Meeting> mMeetingsFiltered = new ArrayList<>();
+        for (Meeting meeting : meetings) {
+            if (room == meeting.getRoom()) {
+                mMeetingsFiltered.add(meeting);
+            }
+        }
+        return mMeetingsFiltered;
     }
 
 
