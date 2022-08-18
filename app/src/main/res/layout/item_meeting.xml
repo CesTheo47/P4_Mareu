@@ -25,6 +25,7 @@
         android:lines="1"
         android:ellipsize="end"
         tools:text="Réunion A -"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
         app:layout_constraintStart_toEndOf="@id/item_meeting_color"
         app:layout_constraintEnd_toStartOf="@id/item_meeting_delete_button"
         app:layout_constraintTop_toTopOf="parent"

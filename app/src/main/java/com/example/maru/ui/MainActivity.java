@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
 
         Button btnStartDate = (Button) dialogView.findViewById(R.id.btn_start_date);
-        btnStartDate.setText("Start Date");
+        btnStartDate.setText("Date de début");
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 

@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Name"
+                android:hint="Nom"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +61,7 @@
                 android:id="@+id/btn_date_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pick Date"
+                android:text="Date"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +71,7 @@
                 android:id="@+id/btn_time_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pick Time"
+                android:text="Heure"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="Save"
+            android:text="Sauvegarder"
             app:cornerRadius="20dp"
             android:layout_marginBottom="20dp"/>
 
