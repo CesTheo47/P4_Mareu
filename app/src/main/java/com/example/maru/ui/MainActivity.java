@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -96,7 +97,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void roomDialog() {
-        // mettre un spinner
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_room_picker, null);
+        dialogBuilder.setView(dialogView);
+
+        Spinner spinnerRoom = (Spinner) dialogView.findViewById(R.id.rooms_spinner);
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
     }
 
     private void resetFilters() {
