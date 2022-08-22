@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MeetingApiService apiService;
     private MainAdapter adapter;
+    private Calendar selectedDate = Calendar.getInstance();
+    private boolean isDateSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void roomDialog() {
+        // mettre un spinner
     }
 
     private void resetFilters() {
@@ -108,11 +111,35 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnStartDate = (Button) dialogView.findViewById(R.id.btn_start_date);
         btnStartDate.setText("Date de début");
+
+            btnStartDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Calendar c = Calendar.getInstance();
+
+                    int mYear = c.get(Calendar.YEAR);
+                    int mMonth = c.get(Calendar.MONTH);
+                    int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(),
+                            new DatePickerDialog.OnDateSetListener() {
+                                @Override
+                                public void onDateSet(DatePicker view, int year, int month, int day) {
+                                    int correctMonth = month + 1;
+                                    //binding.btnDatePicker.setText(day + "/" + correctMonth + "/" + year);
+
+                                    selectedDate.set(Calendar.YEAR, year);
+                                    selectedDate.set(Calendar.MONTH, month);
+                                    selectedDate.set(Calendar.DAY_OF_MONTH, day);
+
+                                    isDateSelected = true;
+                                }
+                            }, mYear, mMonth, mDay);
+                    datePickerDialog.show();
+                }
+            });
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
-
-        // gerer le button
-
     }
 
     @Override
