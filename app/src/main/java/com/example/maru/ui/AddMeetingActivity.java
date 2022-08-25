@@ -90,8 +90,6 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private void initSpinner() {
         binding.roomsSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Room.values()));
-
-        //Room selectedRoom = (Room) binding.roomsSpinner.getSelectedItem();
     }
 
     private void initDateTimePickers() {

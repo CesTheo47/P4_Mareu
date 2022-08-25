@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.example.maru.databinding.ActivityMainBinding;
 import com.example.maru.di.DI;
 import com.example.maru.event.DeleteMeetingEvent;
 import com.example.maru.model.Meeting;
+import com.example.maru.model.Room;
 import com.example.maru.service.MeetingApiService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -35,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private MeetingApiService apiService;
     private MainAdapter adapter;
     private Calendar selectedDate = Calendar.getInstance();
-    private boolean isDateSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
 
         Spinner spinnerRoom = (Spinner) dialogView.findViewById(R.id.rooms_spinner);
+        spinnerRoom.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Room.values()));
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
     }
@@ -117,36 +119,61 @@ public class MainActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
 
         Button btnStartDate = (Button) dialogView.findViewById(R.id.btn_start_date);
-        btnStartDate.setText("Date de début");
+        Button btnEndDate = (Button) dialogView.findViewById(R.id.btn_end_date);
+        //btnStartDate.setText("Date de début"); TODO in Layout
 
-            btnStartDate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Calendar c = Calendar.getInstance();
+        Calendar beginDate = Calendar.getInstance();
+        Calendar endDate = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
 
-                    int mYear = c.get(Calendar.YEAR);
-                    int mMonth = c.get(Calendar.MONTH);
-                    int mDay = c.get(Calendar.DAY_OF_MONTH);
+        int mYear = today.get(Calendar.YEAR);
+        int mMonth = today.get(Calendar.MONTH);
+        int mDay = today.get(Calendar.DAY_OF_MONTH);
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(),
-                            new DatePickerDialog.OnDateSetListener() {
-                                @Override
-                                public void onDateSet(DatePicker view, int year, int month, int day) {
-                                    int correctMonth = month + 1;
-                                    //binding.btnDatePicker.setText(day + "/" + correctMonth + "/" + year);
+        btnStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                                    selectedDate.set(Calendar.YEAR, year);
-                                    selectedDate.set(Calendar.MONTH, month);
-                                    selectedDate.set(Calendar.DAY_OF_MONTH, day);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int day) {
+                                int correctMonth = month + 1;
+                                btnStartDate.setText(day + "/" + correctMonth + "/" + year);
 
-                                    isDateSelected = true;
-                                }
-                            }, mYear, mMonth, mDay);
-                    datePickerDialog.show();
-                }
-            });
+                                beginDate.set(Calendar.YEAR, year);
+                                beginDate.set(Calendar.MONTH, month);
+                                beginDate.set(Calendar.DAY_OF_MONTH, day);
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
+        btnEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int day) {
+                                int correctMonth = month + 1;
+                                btnEndDate.setText(day + "/" + correctMonth + "/" + year);
+
+                                endDate.set(Calendar.YEAR, year);
+                                endDate.set(Calendar.MONTH, month);
+                                endDate.set(Calendar.DAY_OF_MONTH, day);
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
+
+        //TODO Btn submit check que les 2 ont été fait & la date de debut est avant la date de fin
     }
 
     @Override
