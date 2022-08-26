@@ -106,6 +106,17 @@ public class MainActivity extends AppCompatActivity {
         spinnerRoom.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Room.values()));
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
+
+        Button btnRoomFilterSubmit = (Button) dialogView.findViewById(R.id.btnRoomFilterSubmit);
+
+        btnRoomFilterSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO add condition
+                adapter.updateList(apiService.getMeetings());
+                //onBackPressed();
+            }
+        });
     }
 
     private void resetFilters() {
