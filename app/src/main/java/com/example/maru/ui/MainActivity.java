@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MeetingApiService apiService;
     private MainAdapter adapter;
-    private Calendar selectedDate = Calendar.getInstance();
+    boolean isBeginDateSet = false;
+    boolean isEndDateSet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
         btnRoomFilterSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO add condition
-                adapter.updateList(apiService.getMeetings());
-                //onBackPressed();
+                Room selectedRoom = (Room) spinnerRoom.getSelectedItem();
+                adapter.updateList(apiService.getMeetingsByRoom(selectedRoom));
+                alertDialog.dismiss();
             }
         });
     }
@@ -136,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
         Calendar beginDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
+        isBeginDateSet = false;
+        isEndDateSet = false;
+
 
         int mYear = today.get(Calendar.YEAR);
         int mMonth = today.get(Calendar.MONTH);
@@ -155,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                                 beginDate.set(Calendar.YEAR, year);
                                 beginDate.set(Calendar.MONTH, month);
                                 beginDate.set(Calendar.DAY_OF_MONTH, day);
+                                isBeginDateSet = true;
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -175,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
                                 endDate.set(Calendar.YEAR, year);
                                 endDate.set(Calendar.MONTH, month);
                                 endDate.set(Calendar.DAY_OF_MONTH, day);
+                                isEndDateSet = true;
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -184,7 +192,32 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
-        //TODO Btn submit check que les 2 ont été fait & la date de debut est avant la date de fin
+        Button btnDateFilterSubmit = (Button) dialogView.findViewById(R.id.btnDateFilterSubmit);
+
+        btnDateFilterSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isBeginDateSet) {
+                    Toast.makeText(MainActivity.this, "Merci de renseigner une date de début", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Date beginDateSelected =  beginDate.getTime();
+                Date endDateSelected =  endDate.getTime();
+
+                if (!isEndDateSet) {
+                    Toast.makeText(MainActivity.this, "Merci de renseigner une date de fin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (beginDateSelected.after(endDateSelected)) {
+                    Toast.makeText(MainActivity.this, "Votre date de début est superieur à votre date de fin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                adapter.updateList(apiService.getMeetingsByDates(beginDateSelected, endDateSelected));
+                alertDialog.dismiss();
+            }
+        });
     }
 
     @Override
