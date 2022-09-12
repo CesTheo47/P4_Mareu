@@ -16,7 +16,7 @@ public interface MeetingApiService {
     Meeting getMeeting(Long id);
 
     // Create meeting
-    void createMeeting(Meeting meeting);
+    boolean createMeeting(Meeting meeting);
 
     // Delete meeting
     void deleteMeeting(Meeting meeting);

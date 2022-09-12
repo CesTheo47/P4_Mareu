@@ -46,8 +46,13 @@ public class AddMeetingActivity extends AppCompatActivity {
     private List<String> emailList = new ArrayList();
     private boolean isDateSelected = false;
     private boolean isTimeSelected = false;
+    private int selectedYear;
+    private int selectedMonth;
+    private int selectedDay;
+    private int selectedHour;
+    private int selectedMinute;
 
-    private Calendar selectedDate = Calendar.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,10 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         apiService = DI.getMeetingApiService();
 
+        if (savedInstanceState == null) {
+            selectedColor = ContextCompat.getColor(this, R.color.purple_500);
+        }
+
         initColorPicker();
         initSpinner();
         initDateTimePickers();
@@ -65,9 +74,42 @@ public class AddMeetingActivity extends AppCompatActivity {
         initSaveButton();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+
+//        savedInstanceState.putBoolean("MyBoolean", true);
+//        savedInstanceState.putDouble("myDouble", 1.9);
+        savedInstanceState.putInt("selectedColor", selectedColor);
+//        savedInstanceState.putString("MyString", "Welcome back to Android");
+
+        // etc.
+
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+//onRestoreInstanceState
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+
+//        boolean myBoolean = savedInstanceState.getBoolean("MyBoolean");
+//        double myDouble = savedInstanceState.getDouble("myDouble");
+         selectedColor = savedInstanceState.getInt("selectedColor");
+         binding.itemMeetingColor.setColorFilter(selectedColor);
+//        String myString = savedInstanceState.getString("MyString");
+    }
+
 
     private void initColorPicker() {
-        selectedColor = ContextCompat.getColor(this, R.color.purple_500);
         binding.itemMeetingColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,9 +153,9 @@ public class AddMeetingActivity extends AppCompatActivity {
                                 int correctMonth = month + 1;
                                 binding.btnDatePicker.setText(day + "/" + correctMonth + "/" + year);
 
-                                selectedDate.set(Calendar.YEAR, year);
-                                selectedDate.set(Calendar.MONTH, month);
-                                selectedDate.set(Calendar.DAY_OF_MONTH, day);
+                                selectedYear = year;
+                                selectedYear = month;
+                                selectedYear = day;
 
                                 isDateSelected = true;
                             }
@@ -138,8 +180,8 @@ public class AddMeetingActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 binding.btnTimePicker.setText(String.format("%02d:%02d", hourOfDay, minute));
 
-                                selectedDate.set(Calendar.HOUR, hourOfDay);
-                                selectedDate.set(Calendar.MINUTE, minute);
+                                selectedYear = hourOfDay;
+                                selectedYear = minute;
 
                                 isTimeSelected = true;
                             }
@@ -186,6 +228,13 @@ public class AddMeetingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isFormValid()) {
+                    Calendar selectedDate = Calendar.getInstance();
+                    selectedDate.set(Calendar.YEAR, selectedYear);
+                    selectedDate.set(Calendar.MONTH, selectedMonth);
+                    selectedDate.set(Calendar.DAY_OF_MONTH, selectedDay);
+                    selectedDate.set(Calendar.HOUR, selectedHour);
+                    selectedDate.set(Calendar.MINUTE, selectedMinute);
+
                     Meeting meeting = new Meeting(
                             binding.name.getText().toString(),
                             selectedDate.getTime(),

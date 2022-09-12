@@ -91,10 +91,13 @@
                 android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:ems="10"
                 android:hint="Email"
-                android:inputType="text"
-                tools:ignore="MissingConstraints" />
+                android:inputType="text"/>
 
             <ImageView
                 android:id="@+id/email_add"

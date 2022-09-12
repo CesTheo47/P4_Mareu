@@ -1,11 +1,16 @@
 package com.example.maru.model;
 
 public enum Room {
-    PEACH("Peach"),
-    MARIO("Mario"),
-    YOSHI("Yoshi"),
-    TOAD("Toad"),
-    LUIGI("Luigi");
+    PARIS("Paris"),
+    LONDRES("Londre"),
+    SYDNEY("Sydney"),
+    MADRID("Madrid"),
+    ROME("Rome"),
+    RIO("Rio"),
+    PEKIN("Pekin"),
+    BERLIN("Berlin"),
+    LOS_ANGELES("Los Angeles"),
+    NEW_YORK("New York");
 
     private final String name;
 
