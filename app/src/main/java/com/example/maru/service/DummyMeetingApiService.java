@@ -65,6 +65,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
     public boolean createMeeting(Meeting meeting) {
         meetings.add(meeting);
+        return true;
     }
 
     @Override

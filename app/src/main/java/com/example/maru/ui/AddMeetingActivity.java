@@ -77,16 +77,15 @@ public class AddMeetingActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
 
-        // Save UI state changes to the savedInstanceState.
-        // This bundle will be passed to onCreate if the process is
-        // killed and restarted.
-
-//        savedInstanceState.putBoolean("MyBoolean", true);
-//        savedInstanceState.putDouble("myDouble", 1.9);
         savedInstanceState.putInt("selectedColor", selectedColor);
-//        savedInstanceState.putString("MyString", "Welcome back to Android");
-
-        // etc.
+        savedInstanceState.putInt("selectedYear", selectedYear);
+        savedInstanceState.putInt("selectedMonth", selectedMonth);
+        savedInstanceState.putInt("selectedDay", selectedDay);
+        savedInstanceState.putInt("selectedHour", selectedHour);
+        savedInstanceState.putInt("selectedMinute", selectedMinute);
+        savedInstanceState.putBoolean("isDateSelected", isDateSelected);
+        savedInstanceState.putBoolean("isTimeSelected", isTimeSelected);
+        savedInstanceState.putStringArrayList("emailList", (ArrayList<String>) emailList);
 
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -98,14 +97,19 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         super.onRestoreInstanceState(savedInstanceState);
 
-        // Restore UI state from the savedInstanceState.
-        // This bundle has also been passed to onCreate.
-
-//        boolean myBoolean = savedInstanceState.getBoolean("MyBoolean");
-//        double myDouble = savedInstanceState.getDouble("myDouble");
          selectedColor = savedInstanceState.getInt("selectedColor");
          binding.itemMeetingColor.setColorFilter(selectedColor);
-//        String myString = savedInstanceState.getString("MyString");
+         selectedYear = savedInstanceState.getInt("selectedYear");
+         selectedMonth = savedInstanceState.getInt("selectedMonth");
+         selectedDay = savedInstanceState.getInt("selectedDay");
+         binding.btnDatePicker.setText(selectedDay + "/" + selectedMonth + "/" + selectedYear);
+         isDateSelected = savedInstanceState.getBoolean("isDateSelected");
+        isTimeSelected = savedInstanceState.getBoolean("isTimeSelected");
+         selectedHour = savedInstanceState.getInt("selectedHour");
+         selectedMinute = savedInstanceState.getInt("selectedMinute");
+        binding.btnTimePicker.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+         emailList = savedInstanceState.getStringArrayList("emailList");
+         updateEmailList();
     }
 
 
@@ -154,8 +158,8 @@ public class AddMeetingActivity extends AppCompatActivity {
                                 binding.btnDatePicker.setText(day + "/" + correctMonth + "/" + year);
 
                                 selectedYear = year;
-                                selectedYear = month;
-                                selectedYear = day;
+                                selectedMonth = month;
+                                selectedDay = day;
 
                                 isDateSelected = true;
                             }
@@ -180,8 +184,8 @@ public class AddMeetingActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 binding.btnTimePicker.setText(String.format("%02d:%02d", hourOfDay, minute));
 
-                                selectedYear = hourOfDay;
-                                selectedYear = minute;
+                                selectedHour = hourOfDay;
+                                selectedMinute = minute;
 
                                 isTimeSelected = true;
                             }
@@ -269,6 +273,8 @@ public class AddMeetingActivity extends AppCompatActivity {
             Toast.makeText(AddMeetingActivity.this, "Merci de renseigner un email", Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        //if ()
 
         return true;
     }

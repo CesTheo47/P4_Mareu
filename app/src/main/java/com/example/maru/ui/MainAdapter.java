@@ -23,7 +23,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private List<Meeting> mMeetings;
     private Context mContext;
 
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh'h'mm");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH'h'mm");
 
 
     public MainAdapter(List<Meeting> items, Context context) {
