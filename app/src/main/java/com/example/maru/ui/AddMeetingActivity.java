@@ -246,8 +246,12 @@ public class AddMeetingActivity extends AppCompatActivity {
                             emailList,
                             selectedColor
                     );
-                    apiService.createMeeting(meeting);
-                    onBackPressed();
+                    boolean isMeetingCreate = apiService.createMeeting(meeting);
+                    if (isMeetingCreate) {
+                        onBackPressed();
+                    } else {
+                        Toast.makeText(AddMeetingActivity.this, "Le crénau est utilisé", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -273,8 +277,6 @@ public class AddMeetingActivity extends AppCompatActivity {
             Toast.makeText(AddMeetingActivity.this, "Merci de renseigner un email", Toast.LENGTH_SHORT).show();
             return false;
         }
-
-        //if ()
 
         return true;
     }

@@ -5,7 +5,9 @@ import org.junit.Before;
 
 import static org.junit.Assert.*;
 
+import com.example.maru.di.DI;
 import com.example.maru.model.Meeting;
+import com.example.maru.service.DummyMeetingGenerator;
 import com.example.maru.service.MeetingApiService;
 
 import java.util.List;
@@ -26,33 +28,30 @@ public class MareuServiceTest {
     public void generateListMeetingWithSuccess() {
         List<Meeting> lMeetings =  service.getMeetings();
         int listSize = lMeetings.size();
-        //assertEquals( 5, listSize );
+        assertEquals( 5, listSize );
     }
 
     @Test
-    public void getMeetingWithSuccess() {
-
+    public void addMeetingWithSucess() {
+        Meeting meetingToCreate = DummyMeetingGenerator.DUMMY_MEETINGS.get(0);
+        service.createMeeting(meetingToCreate);
+        assertTrue(service.getMeetings().contains(meetingToCreate));
     }
 
     @Test
-    public void createMeetingWithSuccess() {
-
-    }
-
-    @Test
-    public void deleteMeetingWithSuccess() {
+    public void removeMeetingWithSuccess() {
         Meeting meetingToDelete = service.getMeetings().get(0);
         service.deleteMeeting(meetingToDelete);
         assertFalse(service.getMeetings().contains(meetingToDelete));
     }
 
     @Test
-    public void filterByRoomWithSuccess() {
+    public void filterByRoom() {
 
     }
 
     @Test
-    public void filterByDateWithSuccess() {
+    public void filterByDate() {
 
     }
 
