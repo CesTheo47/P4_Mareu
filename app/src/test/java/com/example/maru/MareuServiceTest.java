@@ -1,20 +1,28 @@
 package com.example.maru;
 
-import org.junit.Test;
-import org.junit.Before;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import com.example.maru.di.DI;
 import com.example.maru.model.Meeting;
-import com.example.maru.service.DummyMeetingGenerator;
+import com.example.maru.model.Room;
 import com.example.maru.service.MeetingApiService;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Unit Test on Maréu service
  */
+@RunWith(JUnit4.class)
 public class MareuServiceTest {
 
     private MeetingApiService service;
@@ -22,6 +30,8 @@ public class MareuServiceTest {
     @Before
     public void setup() {
         service = DI.getNewInstanceApiService();
+//        Color color = mock(Color.class);
+//        when(color.)
     }
 
     @Test
@@ -32,10 +42,17 @@ public class MareuServiceTest {
     }
 
     @Test
-    public void addMeetingWithSucess() {
-        Meeting meetingToCreate = DummyMeetingGenerator.DUMMY_MEETINGS.get(0);
+    public void addMeetingWithSuccess() {
+        Meeting meetingToCreate = new Meeting( "Réunion test", Calendar.getInstance().getTime(), Room.PEKIN, new ArrayList<>(), -1500);
         service.createMeeting(meetingToCreate);
         assertTrue(service.getMeetings().contains(meetingToCreate));
+    }
+
+    @Test
+    public void addMeetingWithErrorSameRoom() {
+        Meeting meetingToCreate = new Meeting( "Réunion test", Calendar.getInstance().getTime(), Room.ROME, new ArrayList<>(), -1500);
+        service.createMeeting(meetingToCreate);
+        assertFalse(service.getMeetings().contains(meetingToCreate));
     }
 
     @Test
@@ -52,11 +69,6 @@ public class MareuServiceTest {
 
     @Test
     public void filterByDate() {
-
-    }
-
-    @Test
-    public void checkRoomAvailability() {
 
     }
 

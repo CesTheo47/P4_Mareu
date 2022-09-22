@@ -1,11 +1,10 @@
 package com.example.maru.model;
 
-import androidx.annotation.ColorRes;
-
 import java.util.Date;
 import java.util.List;
 
 public class Meeting {
+
 
     /** Name */
     private String name;
@@ -58,4 +57,5 @@ public class Meeting {
     public void setColor(int color) {
         this.color = color;
     }
+
 }

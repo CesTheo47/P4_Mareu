@@ -3,8 +3,6 @@ package com.example.maru.service;
 import com.example.maru.model.Meeting;
 import com.example.maru.model.Room;
 
-import java.time.Month;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,11 +54,6 @@ public class DummyMeetingApiService implements MeetingApiService {
         return mMeetingsFiltered;
     }
 
-
-    @Override
-    public Meeting getMeeting(Long id) {
-        return null;
-    }
 
     @Override
     public boolean createMeeting(Meeting meeting) {

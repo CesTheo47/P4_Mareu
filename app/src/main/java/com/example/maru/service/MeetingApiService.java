@@ -13,7 +13,6 @@ public interface MeetingApiService {
     List<Meeting> getMeetingsByDates(Date startDate, Date endDate);
     List<Meeting> getMeetingsByRoom(Room room);
 
-    Meeting getMeeting(Long id);
 
     // Create meeting
     boolean createMeeting(Meeting meeting);
