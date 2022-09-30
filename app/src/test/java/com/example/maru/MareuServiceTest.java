@@ -71,11 +71,11 @@ public class MareuServiceTest {
 
     @Test
     public void filterByDate() {
-//        Meeting meetingToCreate = new Meeting("Réunion test", Calendar.getInstance().getTime(), Room.ROME, new ArrayList<>(), -1500);
-//        service.createMeeting(meetingToCreate);
-//        List<Meeting> lMeetingsFiltered = service.getMeetingsByDates(beginDateSelected, endDateSelected);
-//        int nbMeetingSelected = lMeetingsFiltered.size();
-//        assertEquals(1, nbMeetingSelected);
+        Meeting meetingToCreate = new Meeting("Réunion test", Calendar.getInstance().getTime(), Room.ROME, new ArrayList<>(), -1500);
+        service.createMeeting(meetingToCreate);
+        List<Meeting> lMeetingsFiltered = service.getMeetingsByDates(beginDateSelected, endDateSelected);
+        int nbMeetingSelected = lMeetingsFiltered.size();
+        assertEquals(1, nbMeetingSelected);
     }
 
 
