@@ -65,15 +65,33 @@ public class MareuServiceTest {
     @Test
     public void filterByRoom() {
         List<Meeting> lMeetingsFiltered = service.getMeetingsByRoom(Room.PARIS);
-        int nbMeetingSelected = lMeetingsFiltered.size();
-        assertEquals(1, nbMeetingSelected);
+
+        for (Meeting m : lMeetingsFiltered) {
+        assertEquals(m.getRoom(), Room.PARIS);
     }
 
     @Test
     public void filterByDate() {
-        Meeting meetingToCreate = new Meeting("Réunion test", Calendar.getInstance().getTime(), Room.ROME, new ArrayList<>(), -1500);
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DATE, 20);
+        c.set(Calendar.MONTH, 4);
+        c.set(Calendar.YEAR, 22);
+
+        Meeting meetingToCreate = new Meeting("Réunion test", c.getTime(), Room.ROME, new ArrayList<>(), -1500);
         service.createMeeting(meetingToCreate);
-        List<Meeting> lMeetingsFiltered = service.getMeetingsByDates(beginDateSelected, endDateSelected);
+
+        Calendar cBegin = Calendar.getInstance();
+        c.set(Calendar.DATE, 19);
+        c.set(Calendar.MONTH, 4);
+        c.set(Calendar.YEAR, 22);
+
+        Calendar cEnd = Calendar.getInstance();
+        c.set(Calendar.DATE, 21);
+        c.set(Calendar.MONTH, 4);
+        c.set(Calendar.YEAR, 22);
+
+        List<Meeting> lMeetingsFiltered = service.getMeetingsByDates(cBegin.getTime(), cEnd.getTime() );
+
         int nbMeetingSelected = lMeetingsFiltered.size();
         assertEquals(1, nbMeetingSelected);
     }
