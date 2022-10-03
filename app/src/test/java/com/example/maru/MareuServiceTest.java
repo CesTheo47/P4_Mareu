@@ -67,11 +67,12 @@ public class MareuServiceTest {
         List<Meeting> lMeetingsFiltered = service.getMeetingsByRoom(Room.PARIS);
 
         for (Meeting m : lMeetingsFiltered) {
-        assertEquals(m.getRoom(), Room.PARIS);
+            assertEquals(m.getRoom(), Room.PARIS);
+        }
     }
 
     @Test
-    public void filterByDate() {
+    public void filterByDate () {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.DATE, 20);
         c.set(Calendar.MONTH, 4);
@@ -90,11 +91,10 @@ public class MareuServiceTest {
         c.set(Calendar.MONTH, 4);
         c.set(Calendar.YEAR, 22);
 
-        List<Meeting> lMeetingsFiltered = service.getMeetingsByDates(cBegin.getTime(), cEnd.getTime() );
+        List<Meeting> lMeetingsFilteredDate = service.getMeetingsByDates(cBegin.getTime(), cEnd.getTime());
 
-        int nbMeetingSelected = lMeetingsFiltered.size();
-        assertEquals(1, nbMeetingSelected);
+        assertEquals(1, lMeetingsFilteredDate.size());
+        assertTrue(lMeetingsFilteredDate.contains(meetingToCreate));
     }
-
 
 }
