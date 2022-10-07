@@ -82,14 +82,14 @@ public class MareuServiceTest {
         service.createMeeting(meetingToCreate);
 
         Calendar cBegin = Calendar.getInstance();
-        c.set(Calendar.DATE, 19);
-        c.set(Calendar.MONTH, 4);
-        c.set(Calendar.YEAR, 22);
+        cBegin.set(Calendar.DATE, 19);
+        cBegin.set(Calendar.MONTH, 4);
+        cBegin.set(Calendar.YEAR, 22);
 
         Calendar cEnd = Calendar.getInstance();
-        c.set(Calendar.DATE, 21);
-        c.set(Calendar.MONTH, 4);
-        c.set(Calendar.YEAR, 22);
+        cEnd.set(Calendar.DATE, 21);
+        cEnd.set(Calendar.MONTH, 4);
+        cEnd.set(Calendar.YEAR, 22);
 
         List<Meeting> lMeetingsFilteredDate = service.getMeetingsByDates(cBegin.getTime(), cEnd.getTime());
 
