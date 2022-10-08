@@ -29,7 +29,7 @@ public class MareuServiceTest {
 
     @Before
     public void setup() {
-        service = DI.getNewInstanceApiService();
+        service = DI.getMeetingApiService();
 //        Color color = mock(Color.class);
 //        when(color.)
     }

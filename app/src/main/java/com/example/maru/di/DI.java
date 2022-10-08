@@ -6,13 +6,13 @@ import com.example.maru.service.MeetingApiService;
 
 public class DI {
 
-    private static MeetingApiService service = new DummyMeetingApiService();
+    private static MeetingApiService service;
 
-    public static MeetingApiService getMeetingApiService() { return service; }
-
-    public static MeetingApiService getNewInstanceApiService() {
-
-        return new DummyMeetingApiService();
-
-    };
+    // Singleton
+    public static MeetingApiService getMeetingApiService() {
+        if (service == null) {
+            service = new DummyMeetingApiService();
+        }
+        return service;
+    }
 }
