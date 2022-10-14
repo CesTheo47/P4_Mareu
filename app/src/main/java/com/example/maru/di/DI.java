@@ -15,4 +15,9 @@ public class DI {
         }
         return service;
     }
+
+    // For Testing
+    public static MeetingApiService getMeetingApiServiceNewInstance() {
+        return new DummyMeetingApiService();
+    }
 }

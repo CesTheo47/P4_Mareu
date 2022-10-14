@@ -7,7 +7,6 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -65,8 +64,8 @@ public class AddMeetingActivityTest {
         onView(allOf(withId(android.R.id.button1), withText("OK"), childAtPosition(childAtPosition(withClassName(is("android.widget.ScrollView")), 0), 3))).perform(scrollTo(), click());
 
         onView(allOf(withId(R.id.submitButton), withText("Sauvegarder"), childAtPosition(childAtPosition(withClassName(is("android.widget.ScrollView")), 0), 6))).perform(scrollTo(), click());
-
-        onView(withText("Merci de renseigner un email")).inRoot(withDecorView(is(decorView))).check(matches(isDisplayed()));
+        // Check if we are in the same layout
+        onView(withId(R.id.root_create_meeting)).check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(

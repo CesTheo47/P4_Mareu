@@ -18,9 +18,6 @@ public abstract class DummyMeetingGenerator {
             new Meeting("Réunion D", Calendar.getInstance().getTime(), Room.LONDRES, getFakeEmails(), -225550),
             new Meeting("Réunion E", Calendar.getInstance().getTime(), Room.SYDNEY, getFakeEmails(), -3722)
 
-            //new Meeting( "Réunion F", Calendar.getInstance().getTime(), Room.PEKIN, getFakeEmails(), Color.parseColor("#F7F074")),
-            //new Meeting( "Réunion G", Calendar.getInstance().getTime(), Room.NEW_YORK, getFakeEmails(), Color.parseColor("#fcc244")),
-            //new Meeting( "Réunion H", Calendar.getInstance().getTime(), Room.LONDRES, getFakeEmails(), Color.parseColor("#81f774"))
 
     );
 

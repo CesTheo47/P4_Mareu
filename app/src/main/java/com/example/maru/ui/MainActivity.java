@@ -3,14 +3,12 @@ package com.example.maru.ui;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,7 +20,6 @@ import com.example.maru.R;
 import com.example.maru.databinding.ActivityMainBinding;
 import com.example.maru.di.DI;
 import com.example.maru.event.DeleteMeetingEvent;
-import com.example.maru.model.Meeting;
 import com.example.maru.model.Room;
 import com.example.maru.service.MeetingApiService;
 
@@ -31,7 +28,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -133,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnStartDate = (Button) dialogView.findViewById(R.id.btn_start_date);
         Button btnEndDate = (Button) dialogView.findViewById(R.id.btn_end_date);
-        //btnStartDate.setText("Date de début"); TODO in Layout
 
         Calendar beginDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
