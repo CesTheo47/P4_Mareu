@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.maru.R;
 import com.example.maru.databinding.ItemMeetingBinding;
 import com.example.maru.event.DeleteMeetingEvent;
 import com.example.maru.model.Meeting;
@@ -41,10 +39,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
         StringBuilder sb = new StringBuilder();
-        for (String email : meeting.getEmailList()){
+        for (String email : meeting.getEmailList()) {
             sb.append(email);
 
-            if (meeting.getEmailList().indexOf(email) != (meeting.getEmailList().size() -1)) {
+            if (meeting.getEmailList().indexOf(email) != (meeting.getEmailList().size() - 1)) {
                 sb.append(", ");
             }
         }
@@ -70,7 +68,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-       public ItemMeetingBinding binding;
+        public ItemMeetingBinding binding;
 
         public ViewHolder(ItemMeetingBinding binding) {
             super(binding.getRoot());

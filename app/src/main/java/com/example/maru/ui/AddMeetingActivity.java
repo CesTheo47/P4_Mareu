@@ -2,16 +2,11 @@ package com.example.maru.ui;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -33,8 +28,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -51,7 +44,6 @@ public class AddMeetingActivity extends AppCompatActivity {
     private int selectedDay;
     private int selectedHour;
     private int selectedMinute;
-
 
 
     @Override
@@ -90,26 +82,25 @@ public class AddMeetingActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-//onRestoreInstanceState
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
 
         super.onRestoreInstanceState(savedInstanceState);
 
-         selectedColor = savedInstanceState.getInt("selectedColor");
-         binding.itemMeetingColor.setColorFilter(selectedColor);
-         selectedYear = savedInstanceState.getInt("selectedYear");
-         selectedMonth = savedInstanceState.getInt("selectedMonth");
-         selectedDay = savedInstanceState.getInt("selectedDay");
-         binding.btnDatePicker.setText(selectedDay + "/" + selectedMonth + "/" + selectedYear);
-         isDateSelected = savedInstanceState.getBoolean("isDateSelected");
+        selectedColor = savedInstanceState.getInt("selectedColor");
+        binding.itemMeetingColor.setColorFilter(selectedColor);
+        selectedYear = savedInstanceState.getInt("selectedYear");
+        selectedMonth = savedInstanceState.getInt("selectedMonth");
+        selectedDay = savedInstanceState.getInt("selectedDay");
+        binding.btnDatePicker.setText(selectedDay + "/" + selectedMonth + "/" + selectedYear);
+        isDateSelected = savedInstanceState.getBoolean("isDateSelected");
         isTimeSelected = savedInstanceState.getBoolean("isTimeSelected");
-         selectedHour = savedInstanceState.getInt("selectedHour");
-         selectedMinute = savedInstanceState.getInt("selectedMinute");
+        selectedHour = savedInstanceState.getInt("selectedHour");
+        selectedMinute = savedInstanceState.getInt("selectedMinute");
         binding.btnTimePicker.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
-         emailList = savedInstanceState.getStringArrayList("emailList");
-         updateEmailList();
+        emailList = savedInstanceState.getStringArrayList("emailList");
+        updateEmailList();
     }
 
 
@@ -200,7 +191,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         binding.emailAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkIfEmailIsValid(binding.editEmail .getText().toString())){
+                if (checkIfEmailIsValid(binding.editEmail.getText().toString())) {
                     emailList.add(binding.editEmail.getText().toString());
                     binding.editEmail.setText("");
                     updateEmailList();
@@ -217,10 +208,10 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private void updateEmailList() {
         StringBuilder sb = new StringBuilder();
-        for (String email : emailList){
+        for (String email : emailList) {
             sb.append(email);
 
-            if (emailList.indexOf(email) != (emailList.size() -1)) {
+            if (emailList.indexOf(email) != (emailList.size() - 1)) {
                 sb.append(", ");
             }
         }

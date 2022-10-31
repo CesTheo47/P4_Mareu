@@ -195,8 +195,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Merci de renseigner une date de début", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Date beginDateSelected =  beginDate.getTime();
-                Date endDateSelected =  endDate.getTime();
+                Date beginDateSelected = beginDate.getTime();
+                Date endDateSelected = endDate.getTime();
 
                 if (!isEndDateSet) {
                     Toast.makeText(MainActivity.this, "Merci de renseigner une date de fin", Toast.LENGTH_SHORT).show();
